@@ -17,6 +17,8 @@ export class Home extends Component {
     searchValue: ''
   };
 
+  // alterando
+  
   timeoutUpdate = null;
 
   componentDidMount() {
