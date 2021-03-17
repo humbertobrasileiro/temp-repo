@@ -72,7 +72,7 @@ export class Home extends Component {
       <section className="container">
         <div className="search-container">
           {!!searchValue && (
-            <h1>Search value: {searchValue}</h1>
+            <h1>Search value</h1>
           )}
 
           <TextInput searchValue={searchValue} handleChange={this.handleChange} />
