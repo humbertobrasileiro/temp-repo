@@ -79,24 +79,3 @@ export const Home = () => {
     </section>
   );
 }
-
-// export class Home2 extends Component {
-//   state = {
-//     posts: [],
-//     allPosts: [],
-//     page: 0,
-//     postsPerPage: 10,
-//     searchValue: ''
-//   };
-
-//   // alterando
-
-//   timeoutUpdate = null;
-
-//   componentDidMount() {
-//     this.loadPosts();
-//   }
-  
-//   render() {
-//   }
-// }
