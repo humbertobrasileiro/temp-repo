@@ -1,10 +1,10 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from "react";
 import P from "prop-types";
 import "./styles.css";
 
 import { PostCard } from "../PostCard";
 
-export const Posts = ({ posts = [] }) => (
+export const Posts = ({ posts }) => (
   <div className="posts">
     {posts.map((post) => (
       <PostCard

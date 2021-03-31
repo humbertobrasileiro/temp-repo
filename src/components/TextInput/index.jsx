@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from "react";
 import P from "prop-types";
 import "./styles.css";
 
