@@ -52,7 +52,7 @@ export const Home = () => {
   return (
     <section className="container">
       <div className="search-container">
-        {!!searchValue && <h1>Search value</h1>}
+        {!!searchValue && <h1>Search value:</h1>}
 
         <TextInput searchValue={searchValue} handleChange={handleChange} />
       </div>

@@ -8,6 +8,7 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import { Home } from ".";
+import userEvent from "@testing-library/user-event";
 
 const handlers = [
   rest.get(
@@ -89,6 +90,76 @@ describe("<Home />", () => {
     const button = screen.getByRole("button", { name: /load more posts/i });
 
     expect(button).toBeInTheDocument();
+
+    debug();
+  });
+
+  it("should search for posts", async () => {
+    const { debug } = render(<Home />);
+    const noMorePosts = screen.getByText("Não existem Posts para pesquisa");
+
+    expect.assertions(9);
+
+    await waitForElementToBeRemoved(noMorePosts);
+
+    const search = screen.getByPlaceholderText(/type your search/i);
+
+    expect(
+      screen.getByRole("heading", { name: "title1 1" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "title2 2" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: "title3 3" })
+    ).not.toBeInTheDocument();
+
+    userEvent.type(search, "title1");
+    expect(
+      screen.getByRole("heading", { name: "title1 1" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: "title2 2" })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: "title3 3" })
+    ).not.toBeInTheDocument();
+
+    userEvent.clear(search);
+    expect(
+      screen.getByRole("heading", { name: "title1 1" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "title2 2" })
+    ).toBeInTheDocument();
+
+    userEvent.type(search, "asd");
+    expect(
+      screen.getByText("Não existem Posts para pesquisa")
+    ).toBeInTheDocument();
+
+    userEvent.clear(search);
+
+    debug();
+  });
+
+  it("should load more posts", async () => {
+    const { debug } = render(<Home />);
+    const noMorePosts = screen.getByText("Não existem Posts para pesquisa");
+
+    //  expect.assertions(9);
+
+    await waitForElementToBeRemoved(noMorePosts);
+
+    const button = screen.getByRole("button", { name: /load more posts/i });
+
+    userEvent.click(button);
+
+    expect(
+      screen.getByRole("heading", { name: "title3 3" })
+    ).toBeInTheDocument();
+
+    expect(button).toBeDisabled();
 
     debug();
   });

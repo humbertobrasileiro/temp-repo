@@ -25,7 +25,9 @@ describe("<Button />", () => {
 
     userEvent.click(button);
 
-    expect(fn).toHaveBeenCalledTimes(1);
+    userEvent.click(button, { disabled: true });
+
+    expect(fn).toHaveBeenCalledTimes(2);
   });
 
   it("should be disabled when disabled is true", () => {
